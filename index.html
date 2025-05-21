@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      background: black;
+      background: white;
       margin: 0;
       overflow: hidden;
     }
@@ -42,52 +42,135 @@
     }
   </style>
 </head>
+
+<div style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  color: black;
+  font-family: sans-serif;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5vw;
+  z-index: 9999;
+  box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+  flex-wrap: wrap;
+">
+  <div style="white-space: nowrap;">Bridget Lin</div>
+  <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+    <a href="/photos/about" style="color: black; text-decoration: none;">About</a>
+  </div>
+</div>
+
+
 <body>
 
   
   
-    <img class="image" data-index="0" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/IMG_5610.jpg" />
+    <img class="image" data-index="0" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/fish_pond.jpg" />
   
-    <img class="image" data-index="1" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/68830008.jpg" />
+    <img class="image" data-index="1" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/window_girl.jpg" />
+  
+    <img class="image" data-index="2" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/met_arrow.jpg" />
+  
+    <img class="image" data-index="3" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/getty.jpg" />
+  
+    <img class="image" data-index="4" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/pink_house.jpg" />
+  
+    <img class="image" data-index="5" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/basketba.jpg" />
+  
+    <img class="image" data-index="6" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/dintaifung.jpg" />
+  
+    <img class="image" data-index="7" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/gugg.jpg" />
+  
+    <img class="image" data-index="8" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/getty_facade.jpg" />
+  
+    <img class="image" data-index="9" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/firenze.jpg" />
+  
+    <img class="image" data-index="10" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/florence_house.jpg" />
+  
+    <img class="image" data-index="11" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/globe.jpg" />
+  
+    <img class="image" data-index="12" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/bird.jpg" />
+  
+    <img class="image" data-index="13" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/inside_gugg.jpg" />
+  
+    <img class="image" data-index="14" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/sf_houses.jpg" />
+  
+    <img class="image" data-index="15" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/anna.jpg" />
+  
+    <img class="image" data-index="16" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/wash_sq.jpg" />
+  
+    <img class="image" data-index="17" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/caltrain.jpg" />
+  
+    <img class="image" data-index="18" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/grand_central.jpg" />
+  
+    <img class="image" data-index="19" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/river_view.jpg" />
+  
+    <img class="image" data-index="20" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/nypl.jpg" />
+  
+    <img class="image" data-index="21" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/fifth_ave.jpg" />
+  
+    <img class="image" data-index="22" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/cupid_met.jpg" />
+  
+    <img class="image" data-index="23" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/katz.jpg" />
+  
+    <img class="image" data-index="24" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/sf_streets.jpg" />
+  
+    <img class="image" data-index="25" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/ggb.jpg" />
+  
+    <img class="image" data-index="26" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/tea_garden.jpg" />
   
 
-  <a class="meta-link" href="https://bridget.pictures" target="_blank">
-    <span>Source: bridget.pictures</span>
-  </a>
+  
+
+  
 
   <script>
     const images = document.getElementsByClassName("image");
-
+  
     let globalIndex = 0,
         last = { x: 0, y: 0 };
-
+  
     const activate = (image, x, y) => {
       image.style.left = `${x}px`;
       image.style.top = `${y}px`;
       image.style.zIndex = globalIndex;
-
+  
       image.dataset.status = "active";
       last = { x, y };
-    }
-
+    };
+  
     const distanceFromLast = (x, y) => {
       return Math.hypot(x - last.x, y - last.y);
-    }
-
+    };
+  
     const handleOnMove = e => {
-      if(distanceFromLast(e.clientX, e.clientY) > (window.innerWidth / 20)) {
-        const lead = images[globalIndex % images.length],
-              tail = images[(globalIndex - 5) % images.length];
+  if (distanceFromLast(e.clientX, e.clientY) > (window.innerWidth / 20)) {
+    const index = globalIndex % images.length;
 
-        activate(lead, e.clientX, e.clientY);
-        if(tail) tail.dataset.status = "inactive";
+    const lead = images[index];
+    activate(lead, e.clientX, e.clientY);
 
-        globalIndex++;
+    
+    for (let i = 0; i < images.length; i++) {
+      if ((globalIndex - i + images.length) % images.length >= 4) {
+        images[i].dataset.status = "inactive";
       }
     }
 
+    globalIndex++;
+  }
+};
+  
     window.onmousemove = e => handleOnMove(e);
     window.ontouchmove = e => handleOnMove(e.touches[0]);
   </script>
+  
+  
 </body>
 </html>
