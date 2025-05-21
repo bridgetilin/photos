@@ -2,10 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bridget&#39;s photos</title>
-    <link>https://bridgetilin.github.io/photos/</link>
+    <link>//localhost:1313/</link>
     <description>Recent content on Bridget&#39;s photos</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="https://bridgetilin.github.io/photos/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>//localhost:1313/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/about/</guid>
+      <description>&lt;p&gt;Hello, my name is Bridget Lin! Welcome to my personal photography portfolio. Hoping that creating this website can remind myself of some of my favorite memories caught on camera and share them with anyone interested. All of these photos are film, mostly taken on a _______.&lt;/p&gt;&#xA;&lt;p&gt;This site was inspired by bridget.photos with great help from Hyperplex&amp;rsquo;s code in this youtube video!&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>
