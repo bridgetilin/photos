@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="generator" content="Hugo 0.147.4">
+  <meta charset="UTF-8" />
+  <title>Bridget&#39;s photos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: black;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .image {
+      position: absolute;
+      width: 300px;
+      height: auto;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .image[data-status="active"] {
+      opacity: 1;
+    }
+
+    .meta-link {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      color: white;
+      text-decoration: none;
+      font-family: sans-serif;
+      font-size: 14px;
+      z-index: 9999;
+    }
+
+    .meta-link span {
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  
+  
+    <img class="image" data-index="0" data-status="inactive" src="/images/gallery/IMG_5610.jpg" />
+  
+    <img class="image" data-index="1" data-status="inactive" src="/images/gallery/68830008.jpg" />
+  
+
+  <a class="meta-link" href="https://bridget.pictures" target="_blank">
+    <span>Source: bridget.pictures</span>
+  </a>
+
+  <script>
+    const images = document.getElementsByClassName("image");
+
+    let globalIndex = 0,
+        last = { x: 0, y: 0 };
+
+    const activate = (image, x, y) => {
+      image.style.left = `${x}px`;
+      image.style.top = `${y}px`;
+      image.style.zIndex = globalIndex;
+
+      image.dataset.status = "active";
+      last = { x, y };
+    }
+
+    const distanceFromLast = (x, y) => {
+      return Math.hypot(x - last.x, y - last.y);
+    }
+
+    const handleOnMove = e => {
+      if(distanceFromLast(e.clientX, e.clientY) > (window.innerWidth / 20)) {
+        const lead = images[globalIndex % images.length],
+              tail = images[(globalIndex - 5) % images.length];
+
+        activate(lead, e.clientX, e.clientY);
+        if(tail) tail.dataset.status = "inactive";
+
+        globalIndex++;
+      }
+    }
+
+    window.onmousemove = e => handleOnMove(e);
+    window.ontouchmove = e => handleOnMove(e.touches[0]);
+  </script>
+</body>
+</html>
