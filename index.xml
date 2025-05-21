@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bridget&#39;s photos</title>
-    <link>/</link>
+    <link>https://bridgetilin.github.io/photos/</link>
     <description>Recent content on Bridget&#39;s photos</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://bridgetilin.github.io/photos/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
