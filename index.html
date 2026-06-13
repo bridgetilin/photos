@@ -9,10 +9,17 @@
     body {
       background: white;
       margin: 0;
+    }
+
+    body.view-scatter {
       overflow: hidden;
     }
 
-    .image {
+    body.view-grid {
+      overflow: auto;
+    }
+
+    #scatter-view .image {
       position: absolute;
       width: 300px;
       height: auto;
@@ -22,8 +29,100 @@
       opacity: 0;
     }
 
-    .image[data-status="active"] {
+    #scatter-view .image[data-status="active"] {
       opacity: 1;
+    }
+
+    body.view-grid #scatter-view {
+      display: none;
+    }
+
+    #grid-view {
+      display: none;
+      columns: 220px;
+      column-gap: 12px;
+      padding: 20px 4vw 70px;
+    }
+
+    body.view-grid #grid-view {
+      display: block;
+    }
+
+    #grid-view .grid-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+    }
+
+    #grid-view .grid-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .site-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      color: black;
+      font-family: sans-serif;
+      font-size: 14px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 12px 5vw;
+      z-index: 9999;
+      box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .site-footer-link {
+      justify-self: end;
+      color: black;
+      text-decoration: none;
+    }
+
+    .view-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: sans-serif;
+      font-size: 14px;
+      color: black;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .view-toggle-track {
+      width: 36px;
+      height: 20px;
+      background: #ddd;
+      border-radius: 10px;
+      position: relative;
+      transition: background 0.2s ease;
+    }
+
+    .view-toggle-track::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    body.view-grid .view-toggle-track {
+      background: #333;
+    }
+
+    body.view-grid .view-toggle-track::after {
+      transform: translateX(16px);
     }
 
     .meta-link {
@@ -43,34 +142,19 @@
   </style>
 </head>
 
-<div style="
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  color: black;
-  font-family: sans-serif;
-  font-size: 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 5vw;
-  z-index: 9999;
-  box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
-  flex-wrap: wrap;
-">
-  <div style="white-space: nowrap;">Bridget Lin</div>
-  <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-    <a href="/photos/about" style="color: black; text-decoration: none;">About</a>
-  </div>
-</div>
+<footer class="site-footer">
+  <div>Bridget Lin</div>
+  <button class="view-toggle" id="view-toggle" type="button" aria-label="Switch to grid view">
+    <span id="view-toggle-label">Grid</span>
+    <span class="view-toggle-track" aria-hidden="true"></span>
+  </button>
+  <a class="site-footer-link" href="about/">About</a>
+</footer>
 
 
-<body>
+<body class="view-scatter">
 
-  
-  
+  <div id="scatter-view">
     <img class="image" data-index="0" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/fish_pond.JPG" />
   
     <img class="image" data-index="1" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/window_girl.jpg" />
@@ -145,19 +229,43 @@
 
 	<img class="image" data-index="36" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/nityay.jpg" />
 
-	<img class="image" data-index="36" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/utah.jpg" />
+	<img class="image" data-index="37" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/utah.jpg" />
 
-	<img class="image" data-index="37" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/china_t.jpg" />
+	<img class="image" data-index="38" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/china_t.jpg" />
 
-	<img class="image" data-index="38" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/kite_surfing.jpg" />
-  
+	<img class="image" data-index="39" data-status="inactive" src="https://bridgetilin.github.io/photos/images/gallery/kite_surfing.jpg" />
+  </div>
 
-  
-
-  
+  <div id="grid-view"></div>
 
   <script>
-    const images = document.getElementsByClassName("image");
+    const images = document.querySelectorAll("#scatter-view .image");
+    const gridView = document.getElementById("grid-view");
+    const viewToggle = document.getElementById("view-toggle");
+    const viewToggleLabel = document.getElementById("view-toggle-label");
+
+    images.forEach(image => {
+      const item = document.createElement("div");
+      item.className = "grid-item";
+
+      const gridImage = document.createElement("img");
+      gridImage.src = image.src;
+      gridImage.alt = "";
+      gridImage.loading = "lazy";
+
+      item.appendChild(gridImage);
+      gridView.appendChild(item);
+    });
+
+    viewToggle.addEventListener("click", () => {
+      const isGrid = document.body.classList.toggle("view-grid");
+      document.body.classList.toggle("view-scatter", !isGrid);
+      viewToggleLabel.textContent = isGrid ? "Explore" : "Grid";
+      viewToggle.setAttribute(
+        "aria-label",
+        isGrid ? "Switch to explore view" : "Switch to grid view"
+      );
+    });
   
     let globalIndex = 0,
         last = { x: 0, y: 0 };
